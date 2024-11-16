@@ -1,45 +1,43 @@
 import React from 'react'
-
+import './Navbar.css'
+import { Link } from 'react-router-dom'
 const Navbar = () => {
   return (
-    <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-  <div className="container-fluid">
-    <a className="navbar-brand" href="/" >Textutils</a>
-    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
+    <>
+<nav className="navbar navbar-expand-lg navbar-scroll fixed-top shadow-0 border-bottom border-dark">
+  <div className="container">
+    <a className="navbar-brand" href="#!">BookMyTexi</a>
+    <button className="navbar-toggler" type="button" data-mdb-toggle="collapse"
+      data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <i className="fas fa-bars"></i>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul className="navbar-nav ms-auto">
         <li className="nav-item">
-          <a className="nav-link active" aria-current="page" href="/" >Home</a>
-        </li>
-        <li className="nav-item">
-          <a className="nav-link" href="/" >Link</a>
-        </li>
-        <li className="nav-item dropdown">
-          <a className="nav-link dropdown-toggle" href="/"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a className="dropdown-item" href="/" >Action</a></li>
-            <li><a className="dropdown-item" href="/" >Another action</a></li>
-            <li><hr className="dropdown-divider"></hr></li>
-            <li><a className="dropdown-item" href="/" >Something else here</a></li>
-          </ul>
+          <Link className="nav-link" to="/">Home</Link>
         </li>
         <li className="nav-item">
-          <a className="nav-link disabled" href="/"  tabindex="-1" aria-disabled="true">Disabled</a>
+          <a className="nav-link" href="#!">How It Works</a>
         </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/User-Login">Book a Ride</Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/Driver-Login">Drive with Us</Link>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#!">About Us</a>
+        </li>
+        <li className="nav-item">
+          <a className="nav-link" href="#!">Contect Us</a>
+        </li>
+        <button type="button" className="btn btn-dark ms-3">Get Started</button>
       </ul>
-      <form className="d-flex">
-        <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button className="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
 </nav>
-    </div>
+</>
   )
 }
 
