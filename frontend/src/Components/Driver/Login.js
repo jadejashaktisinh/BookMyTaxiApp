@@ -22,7 +22,7 @@ const Driverlog = () => {
     console.log('Stack:', stack);
     alert('Login data added to the stack!');
     setFormData({ email: '', password: '' });
-    navgiate("/Verification");
+    navgiate("/Driver-Home");
   };
  
   return (

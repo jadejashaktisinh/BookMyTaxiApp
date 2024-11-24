@@ -22,7 +22,7 @@ const Userlog = () => {
     console.log('Stack:', stack);
     alert('Login data added to the stack!');
     setFormData({ email: '', password: '' });
-    navigate("/Verification");
+    navigate("/User-Home");
   };
 
   return (
