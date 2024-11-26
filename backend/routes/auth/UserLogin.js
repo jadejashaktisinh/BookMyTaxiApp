@@ -13,9 +13,8 @@ const UserLogin = async (req,res)=>{
             const match = await bcrypt.compare(req.body.password, ExistingUser.password);
             if(match){
                 res.status(200).send({
-                    sucsss:true
+                    success:true
                 })
-
             }else{
                 res.status(400).send({
                     success:false,
