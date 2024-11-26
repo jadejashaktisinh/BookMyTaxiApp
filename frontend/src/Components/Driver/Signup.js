@@ -6,8 +6,8 @@ const DriverSignup = () => {
   const [stack, setStack] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
-    mobile: "",
     email: "",
+    mobile: "",
     password: "",
   });
   const navigate = useNavigate();
@@ -18,10 +18,33 @@ const DriverSignup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setStack([...stack, formData]);
-    console.log("Stack:", stack);
-    alert("User data added to the stack!");
-    setFormData({ name: "", mobile: "", email: "", password: "" });
-    navigate("/Driver-Vehical-infromation");
+    fetch("http://localhost:3001/driver/singup",{
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData)
+    }).then((res)=>{
+      res.json().then((data)=>{
+        if(data.success){
+
+          
+          localStorage.setItem('email',formData.email)
+          localStorage.setItem('type',"driver");
+
+          navigate("/Driver-Vehical-infromation");
+          setFormData({ name: "", mobile: "", email: "", password: "" });
+        }else{
+          document.getElementById("errors").innerHTML = data.message
+
+        }
+
+          })
+          
+    }).catch((err)=>{
+      console.log(err);
+      
+    })
   };
 
   return (
@@ -34,6 +57,8 @@ const DriverSignup = () => {
         <input type="password" id="Password" name="password" className="mt-2 form-control" placeholder="Your Password" value={formData.password} onChange={handleChange} required/>
         <br/>
         <input type="submit" className="mb-2 btn btn-light mt-2" value="Sign In" />
+        <div id="errors" style={{color:"red",fontSize:"0.8rem"}}>
+        </div>
         <small>
           Already have an account?{" "}
           <Link to="/Driver-Login" className="text-warning">

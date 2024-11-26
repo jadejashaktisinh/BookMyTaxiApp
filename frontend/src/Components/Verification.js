@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Otp.css";
 import { useNavigate } from "react-router-dom";
 
@@ -15,18 +15,48 @@ const Verification = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (stack.every((digit) => digit !== "")) {
-      console.log("Stack:", stack.join(""));
-      alert(`OTP Verified: ${stack.join("")}`);
+
+          if(stack.join("") === localStorage.getItem("otp")){
+
+            navigate("/Home");
+          }
+      
+
+      
     } else {
       alert("Please fill all the fields!");
     }
-    navigate("/Home");
+
   };
+
+  useEffect(()=>{
+    
+    fetch("http://localhost:3001/verification",{
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body:JSON.stringify({
+        email:localStorage.getItem('email'),
+        type:localStorage.getItem("type")
+      })
+    }).then((res)=>{
+          res.json().then((data)=>{
+
+            console.log(data);
+            
+            if(data.success){
+              
+                localStorage.setItem("otp",data.otp)
+            }
+          })
+    })
+  },[])
 
   return (
     <>
       <div className="Verification-cn text-white mb-2 pt-3 pb-3 h5">
-        Enter the OTP sent To<label id="Message-number">+91-XXXXXXXX00</label> 
+        Enter the OTP sent To Email<label id="Message-number"></label> 
       </div>
       <div className="container Verification-cn">
         <header>

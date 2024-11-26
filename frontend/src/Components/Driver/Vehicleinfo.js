@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Vehicleinfo.css";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -22,15 +22,31 @@ const Vehicleinfo = () => {
     setStack([...stack, formData]);
     console.log("Stack:", stack);
     alert("Vehicle data added to the stack!");
-    setFormData({
-      carCompany: "",
-      carName: "",
-      carModal: "",
-      carNumber: "",
-      carType: "",
-    });
-    navigate("/Verification");
+    fetch("http://localhost:3001/driver/addVehical",{
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email:localStorage.getItem('email') , ...formData})
+    }).then((res)=>{
+        setFormData({
+          carCompany: "",
+          carName: "",
+          carModal: "",
+          carNumber: "",
+          carType: "",
+        });
+        navigate("/Verification");
+
+        
+          
+    }).catch((err)=>{
+      console.log(err);
+      
+    })
+
   };
+
 
   return (
     <div className="Main">
