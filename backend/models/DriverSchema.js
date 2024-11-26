@@ -16,7 +16,7 @@ const DriverSchema = new mongoose.Schema({
       message: 'Please provide a valid email address'
     }
   },
-  number: {
+  mobile: {
     type: String,
     required: [true, 'Phone number is required'],
     validate: {
@@ -30,6 +30,6 @@ const DriverSchema = new mongoose.Schema({
     minlength: [6, 'Name must be at least 6 characters long'],
     maxlength: [100, 'Name must not exceed 100 characters']
   }
-});
+},{strict:false});
 
 module.exports = mongoose.model('Driver', DriverSchema);

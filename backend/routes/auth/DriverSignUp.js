@@ -1,4 +1,6 @@
 const Driver = require('../../models/DriverSchema');
+const bcrypt = require('bcrypt');
+
 
 const DriverSignUp = async (req,res)=>{
 
@@ -6,12 +8,14 @@ const DriverSignUp = async (req,res)=>{
 
         if(!IsAlredyExist){
 
-            Driver.validate(req.body).then(() => {
-                console.log("true");
+            try {
+                await Driver.validate(req.body)
                 
-            }).catch((err) => {
-                res.status(400).send(err.errors)
-            });
+            } catch (error) {
+                
+                return res.status(400).send({success:false,message:error.message});
+            }
+                
 
             await bcrypt.hash(req.body.password, 10).then((hash)=>{
                 req.body.password = hash;
@@ -19,13 +23,16 @@ const DriverSignUp = async (req,res)=>{
             
            const NewDriver = new Driver(req.body);
            NewDriver.save().then(()=>{
-                    res.status(200).send("Driver Created")
+                    res.status(200).send({success:true,message:"Driver Created"})
                     
                 }).catch((err) => {
-                    res.status(400).send(err.errors)
+                    res.status(400).send({success:false})
                 });
         }else{
-            res.status(400).send("Driver Alredy Exist")
+            res.status(400).send({
+                success:false,
+                message:"Driver Alredy Exist"
+            })
         }
 
 

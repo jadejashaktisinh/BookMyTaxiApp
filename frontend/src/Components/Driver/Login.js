@@ -19,10 +19,31 @@ const Driverlog = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setStack([...stack, formData]);
-    console.log('Stack:', stack);
-    alert('Login data added to the stack!');
+    fetch("http://localhost:3001/driver/login",{
+      method:"POST",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData)
+    }).then((res)=>{
+      res.json().then((data)=>{
+        if(data.success){
+          localStorage.setItem('email',formData.email)
+          localStorage.setItem('type',"driver");
+
+          navgiate("/Verification");
+        }else{
+          document.getElementById("errors").innerHTML = data.message
+
+        }
+        
+      })
+      
+    }).catch((err)=>{
+      console.log(err);
+      
+    })
     setFormData({ email: '', password: '' });
-    navgiate("/Verification");
   };
  
   return (
@@ -33,6 +54,8 @@ const Driverlog = () => {
         <input type="password" name="password" className="mt-2 form-control" placeholder="Your password" value={formData.password} onChange={handleChange} />
         <br />
         <input type="submit" className="mb-2 btn btn-light mt-2" value="Sign In" />
+        <div id="errors" style={{color:"red",fontSize:"0.8rem"}}>
+        </div>
         <small>
           You do not have an account?{' '}
           <Link to="/Driver-Signup" className="text-warning">

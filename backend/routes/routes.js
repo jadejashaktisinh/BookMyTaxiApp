@@ -3,11 +3,16 @@ const UserSignUp = require("./auth/UserSignUp");
 const UserLogin = require("./auth/UserLogin")
 const DriverSignUp = require("./auth/DriverSignUp");
 const DriverLogin = require("./auth/DriverLogin")
+const addVehical = require("./auth/addVehical")
+const verification = require("./auth/verification")
 
-route.get('/user/singup',UserSignUp);
-route.get('/user/login',UserLogin);
-route.get('/driver/singup',DriverSignUp);
-route.get('/driver/login',DriverLogin);
+route.post('/user/singup',UserSignUp);
+route.post('/user/login',UserLogin);
+route.post('/driver/singup',DriverSignUp);
+route.post('/driver/login',DriverLogin);
+route.post('/driver/addVehical',addVehical);
+route.post('/verification',verification);
+
 
 
 module.exports = route;

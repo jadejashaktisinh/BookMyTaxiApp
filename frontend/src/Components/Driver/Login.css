@@ -13,7 +13,7 @@ body{
   }
   .Main{
     width:400px;
-    height:380px;
+    height:auto;
     padding:40px;
     text-align:center;
     border:1px solid white;

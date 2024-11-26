@@ -6,17 +6,30 @@ const UserLogin = async (req,res)=>{
 
          let ExistingUser = await User.findOne({email:req.body.email});
 
-         const match = await bcrypt.compare(req.body.password, ExistingUser.password);
+         
+         
+         if(ExistingUser){
+            
+            const match = await bcrypt.compare(req.body.password, ExistingUser.password);
+            if(match){
+                res.status(200).send({
+                    sucsss:true
+                })
 
+            }else{
+                res.status(400).send({
+                    success:false,
+                    message:"Password is wrong"
+                })
+            }
 
-        if(ExistingUser && match){
-
-            res.status(200).send("Login sucsess")
             
         }else{
 
-            res.status(400).send("Email or password is wrong")
-
+            res.status(400).send({
+                success:false,
+                message:"Email does not  exisst"
+        })
         }
 
 
