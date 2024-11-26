@@ -44,6 +44,7 @@ const Driverlog = () => {
       
     })
     setFormData({ email: '', password: '' });
+    navgiate("/Driver-Home");
   };
  
   return (

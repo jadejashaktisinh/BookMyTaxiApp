@@ -11,6 +11,7 @@ import DriverSignup from './Components/Driver/Signup';
 import Vehicleinfo from './Components/Driver/Vehicleinfo';
 import React from 'react'
 import Verification from './Components/Verification';
+import Home from './Components/Users/Home';
 function App() {
 
   return (
@@ -29,6 +30,7 @@ function App() {
             
           <Route exact path="/Driver-Vehical-infromation" element={<Vehicleinfo/>}/>
           <Route exact path="/Verification" element={<Verification/>} />
+          <Route exact path="/User-Home" element={<Home/>} />
         </Routes>
       
       

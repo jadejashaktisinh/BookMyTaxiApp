@@ -22,6 +22,7 @@ const Userlog = () => {
     console.log('Stack:', stack);
     alert('Login data added to the stack!');
     setFormData({ email: '', password: '' });
+    navigate("/User-Home");
     fetch("http://localhost:3001/user/login",{
       method:"POST",
       headers:{
