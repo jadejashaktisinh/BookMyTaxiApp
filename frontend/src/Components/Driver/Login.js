@@ -31,7 +31,7 @@ const Driverlog = () => {
           localStorage.setItem('email',formData.email)
           localStorage.setItem('type',"driver");
 
-          navgiate("/Verification");
+          navgiate("/Driver-Home");
         }else{
           document.getElementById("errors").innerHTML = data.message
 
@@ -44,7 +44,6 @@ const Driverlog = () => {
       
     })
     setFormData({ email: '', password: '' });
-    navgiate("/Driver-Home");
   };
  
   return (

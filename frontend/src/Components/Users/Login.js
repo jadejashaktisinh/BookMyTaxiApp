@@ -19,10 +19,7 @@ const Userlog = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setStack([...stack, formData]);
-    console.log('Stack:', stack);
-    alert('Login data added to the stack!');
     setFormData({ email: '', password: '' });
-    navigate("/User-Home");
     fetch("http://localhost:3001/user/login",{
       method:"POST",
       headers:{
@@ -34,8 +31,8 @@ const Userlog = () => {
         if(data.success){
           localStorage.setItem('email',formData.email)
           localStorage.setItem('type',"user");
-
-          navigate("/Verification");
+          
+          navigate("/User-Home");
         }else{
           document.getElementById("errors").innerHTML = data.message
 
